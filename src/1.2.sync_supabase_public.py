@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List
 import requests
 import torch
-from sentence_transformers import SentenceTransformer
+from model_loader import load_sentence_transformer
 
 try:
     import yaml  # type: ignore
@@ -143,7 +143,7 @@ def attach_embeddings(
     if len(use_devices) == 1:
         device = use_devices[0]
         log(f"[Embedding] 加载模型：{model_name}（device={device}）")
-        model = SentenceTransformer(model_name, device=use_devices[0])
+        model = load_sentence_transformer(model_name, device=use_devices[0])
         if max_length > 0 and hasattr(model, "max_seq_length"):
             try:
                 model.max_seq_length = max_length
@@ -188,7 +188,7 @@ def attach_embeddings(
     else:
         log(f"[Embedding] 开始分流编码：total={total_rows}, batch={batch_size}, multi-device={use_devices}")
         log(f"[Embedding] 加载模型：{model_name}（multi-device={use_devices}）")
-        model = SentenceTransformer(model_name)
+        model = load_sentence_transformer(model_name, device=use_devices[0])
         if max_length > 0 and hasattr(model, "max_seq_length"):
             try:
                 model.max_seq_length = max_length

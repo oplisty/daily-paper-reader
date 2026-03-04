@@ -12,6 +12,7 @@ os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS", "1")
 import torch
 from sentence_transformers import SentenceTransformer
 
+from model_loader import load_sentence_transformer
 
 # E5 系列推荐使用 query/passsage 前缀来区分检索侧与文档侧
 E5_QUERY_PREFIX = "query: "
@@ -212,7 +213,7 @@ class EmbeddingCoarseFilter:
 
     print(f"[INFO] 正在加载向量模型：{self.model_name}，device={self.device}")
     debug_hf_runtime("before SentenceTransformer()")
-    self.model = SentenceTransformer(self.model_name, device=self.device)
+    self.model = load_sentence_transformer(self.model_name, device=self.device)
     debug_hf_runtime("after SentenceTransformer()")
     _set_max_seq_length(self.model, self.max_length)
 
