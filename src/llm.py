@@ -23,8 +23,8 @@ GLOBAL_TOKENS = {
 # 单次实验级别的全局时间统计（秒）
 GLOBAL_TIME_SECONDS: float = 0.0
 
-PRIMARY_LLM_BASE_URL = "https://api.gptbest.vip/v1"
-DEFAULT_BLT_BASE_URL = "https://api.bltcy.ai/v1"
+PRIMARY_LLM_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
+DEFAULT_BLT_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
 
 
 def reset_global_tokens():
@@ -751,7 +751,7 @@ class ClientFactory:
             base_url = base_url or "http://localhost:11111/v1"
             return OllamaClient(api_key=api_key or '', model=model, base_url=base_url)
         if provider in ('blt', 'bltcy', 'plato'):
-            return BltClient(api_key=api_key or os.getenv('BLT_API_KEY', ''), model=model, base_url=base_url or os.getenv('BLT_API_BASE', 'https://api.bltcy.ai/v1'))
+            return BltClient(api_key=api_key or os.getenv('BLT_API_KEY', ''), model=model, base_url=base_url or os.getenv('BLT_API_BASE', 'https://ark.cn-beijing.volces.com/api/v3'))
         if provider in ('cstcloud', 'cst', 'cst-cloud', 'keji', 'keji-yun'):
             return CSTCloudClient(api_key=api_key or os.getenv('CSTCLOUD_API_KEY', ''), model=model, base_url=base_url or 'https://uni-api.cstcloud.cn/v1')
         raise ValueError(f"不支持的提供商: {provider}，请使用 'deepseek'、'siliconflow'、'blt'、'cstcloud' 或 'ollama'")
