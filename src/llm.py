@@ -24,7 +24,7 @@ GLOBAL_TOKENS = {
 GLOBAL_TIME_SECONDS: float = 0.0
 
 PRIMARY_LLM_BASE_URL = "https://api.gptbest.vip/v1"
-DEFAULT_BLT_BASE_URL = "https://api.bltcy.ai/v1"
+DEFAULT_BLT_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
 
 
 def reset_global_tokens():
